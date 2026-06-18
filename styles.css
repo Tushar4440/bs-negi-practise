@@ -1,0 +1,738 @@
+:root {
+  color-scheme: light;
+  --ink: #182126;
+  --muted: #647177;
+  --line: #d8e0df;
+  --panel: #ffffff;
+  --page: #eef4f1;
+  --accent: #176b5f;
+  --accent-2: #9a3f2d;
+  --soft: #e5f1ed;
+  --wrong: #fff1ef;
+  --right: #eaf7ef;
+  --shadow: 0 14px 34px rgba(21, 40, 38, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--ink);
+  font-family: Inter, "Noto Sans Devanagari", "Segoe UI", Arial, sans-serif;
+}
+
+button,
+select,
+textarea {
+  font: inherit;
+}
+
+.app-shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+}
+
+.sidebar {
+  background: #173a35;
+  color: #f7fbf9;
+  padding: 28px 22px;
+}
+
+.brand {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.brand-mark {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  background: #f2c35a;
+  color: #173a35;
+  font-weight: 800;
+  border-radius: 8px;
+}
+
+.brand h1,
+.brand p {
+  margin: 0;
+}
+
+.brand h1 {
+  font-size: 1.15rem;
+}
+
+.brand p {
+  color: #c9d9d4;
+  font-size: 0.9rem;
+}
+
+.nav-tabs {
+  display: grid;
+  gap: 8px;
+}
+
+.tab-button {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #eef8f5;
+  background: transparent;
+  text-align: left;
+  padding: 12px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.tab-button.active {
+  background: #f7fbf9;
+  color: #173a35;
+}
+
+.content {
+  padding: 28px;
+  max-width: 1180px;
+  width: 100%;
+}
+
+.view {
+  display: none;
+}
+
+.view.active {
+  display: block;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.page-header h2 {
+  margin: 0 0 4px;
+  font-size: 1.8rem;
+}
+
+.page-header p,
+.muted {
+  margin: 0;
+  color: var(--muted);
+}
+
+.toolbar,
+.quiz-meta,
+.panel,
+.submit-bar,
+.question-card,
+.history-item,
+.metric-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.toolbar {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(180px, 1fr));
+  gap: 14px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+label {
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+select,
+textarea {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fbfdfc;
+  color: var(--ink);
+}
+
+select {
+  min-height: 42px;
+  padding: 0 10px;
+}
+
+textarea {
+  width: 100%;
+  min-height: 150px;
+  padding: 12px;
+  resize: vertical;
+}
+
+.primary-button,
+.ghost-button {
+  border: 0;
+  min-height: 42px;
+  border-radius: 8px;
+  padding: 0 16px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.primary-button {
+  background: var(--accent);
+  color: white;
+}
+
+.ghost-button {
+  background: #e8eeee;
+  color: var(--ink);
+}
+
+.quiz-meta {
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--muted);
+}
+
+.quiz-list {
+  display: grid;
+  gap: 14px;
+}
+
+.question-card {
+  padding: 18px;
+}
+
+.question-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.question-text {
+  display: grid;
+  gap: 6px;
+}
+
+.question-text strong {
+  line-height: 1.45;
+}
+
+.tag {
+  flex: 0 0 auto;
+  height: 28px;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: var(--soft);
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.options {
+  display: grid;
+  gap: 8px;
+}
+
+.option {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 11px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fbfdfc;
+  color: var(--ink);
+}
+
+.option input {
+  margin-top: 3px;
+}
+
+.option.correct {
+  border-color: #76b68b;
+  background: var(--right);
+}
+
+.option.incorrect {
+  border-color: #d58a7f;
+  background: var(--wrong);
+}
+
+.explanation {
+  margin-top: 12px;
+  padding: 12px;
+  border-left: 4px solid var(--accent);
+  background: #f5faf8;
+  color: var(--muted);
+}
+
+.submit-bar {
+  margin-top: 18px;
+  padding: 14px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  bottom: 0;
+}
+
+.score-preview {
+  font-weight: 800;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(150px, 1fr));
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.metric-card {
+  padding: 16px;
+}
+
+.metric-card span {
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.metric-card strong {
+  display: block;
+  margin-top: 6px;
+  font-size: 1.55rem;
+}
+
+.panel {
+  padding: 18px;
+  margin-bottom: 16px;
+}
+
+.panel h3 {
+  margin: 0 0 12px;
+}
+
+.unit-row {
+  display: grid;
+  grid-template-columns: 120px 1fr 80px;
+  align-items: center;
+  gap: 12px;
+  margin: 10px 0;
+}
+
+.bar-track {
+  height: 10px;
+  background: #edf2f0;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  background: var(--accent-2);
+}
+
+.history-list,
+.question-bank {
+  display: grid;
+  gap: 12px;
+}
+
+.history-item {
+  padding: 14px 16px;
+  display: grid;
+  gap: 6px;
+}
+
+.history-item strong {
+  font-size: 1.05rem;
+}
+
+.inline-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.bank-question {
+  padding: 14px 0;
+  border-top: 1px solid var(--line);
+}
+
+/* Tablet: 860px and below */
+@media (max-width: 860px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: static;
+  }
+
+  .nav-tabs {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+  }
+
+  .tab-button {
+    padding: 10px 8px;
+    font-size: 0.9rem;
+  }
+
+  .content {
+    padding: 18px;
+    max-width: 100%;
+  }
+
+  .toolbar {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .page-header,
+  .submit-bar,
+  .quiz-meta,
+  .question-head {
+    flex-direction: column;
+  }
+
+  .unit-row {
+    grid-template-columns: 100px 1fr 60px;
+    gap: 10px;
+  }
+}
+
+/* Mobile: 640px and below */
+@media (max-width: 640px) {
+  :root {
+    font-size: 14px;
+  }
+
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    padding: 16px;
+  }
+
+  .brand {
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .brand-mark {
+    width: 36px;
+    height: 36px;
+    font-size: 0.9rem;
+  }
+
+  .brand h1 {
+    font-size: 1rem;
+  }
+
+  .brand p {
+    font-size: 0.75rem;
+  }
+
+  .nav-tabs {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+
+  .tab-button {
+    padding: 10px 8px;
+    font-size: 0.85rem;
+    border-radius: 6px;
+  }
+
+  .content {
+    padding: 12px;
+  }
+
+  .page-header {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .page-header h2 {
+    font-size: 1.4rem;
+  }
+
+  .page-header p {
+    font-size: 0.9rem;
+  }
+
+  .header-actions {
+    width: 100%;
+  }
+
+  .header-actions button {
+    width: 100%;
+  }
+
+  .toolbar {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 12px;
+  }
+
+  label {
+    font-size: 0.85rem;
+  }
+
+  select,
+  textarea {
+    min-height: 44px;
+    padding: 10px;
+    font-size: 1rem;
+  }
+
+  .primary-button,
+  .ghost-button {
+    min-height: 44px;
+    font-size: 0.95rem;
+    padding: 0 12px;
+    width: 100%;
+  }
+
+  .quiz-meta {
+    padding: 10px 12px;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 0.85rem;
+  }
+
+  .question-card {
+    padding: 14px;
+    margin-bottom: 8px;
+  }
+
+  .question-head {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .tag {
+    width: fit-content;
+    font-size: 0.75rem;
+    padding: 4px 8px;
+  }
+
+  .option {
+    padding: 10px;
+    gap: 8px;
+  }
+
+  .option input {
+    margin-top: 2px;
+  }
+
+  .explanation {
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+
+  .submit-bar {
+    flex-direction: column;
+    gap: 12px;
+    padding: 12px;
+    position: sticky;
+    bottom: 0;
+    border-radius: 0;
+  }
+
+  .submit-bar button {
+    width: 100%;
+  }
+
+  .score-preview {
+    font-size: 0.9rem;
+    width: 100%;
+    text-align: center;
+  }
+
+  .metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .metric-card {
+    padding: 12px;
+  }
+
+  .metric-card strong {
+    font-size: 1.2rem;
+  }
+
+  .panel {
+    padding: 14px;
+    margin-bottom: 12px;
+  }
+
+  .panel h3 {
+    margin: 0 0 10px;
+    font-size: 1.1rem;
+  }
+
+  .unit-row {
+    grid-template-columns: 80px 1fr 50px;
+    gap: 8px;
+    margin: 8px 0;
+  }
+
+  .unit-row strong {
+    font-size: 0.95rem;
+  }
+
+  .history-list,
+  .question-bank {
+    gap: 10px;
+  }
+
+  .history-item {
+    padding: 12px;
+    gap: 4px;
+  }
+
+  .history-item strong {
+    font-size: 0.95rem;
+  }
+
+  .history-item span {
+    font-size: 0.8rem;
+  }
+
+  .inline-actions {
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .inline-actions button {
+    width: 100%;
+  }
+
+  textarea {
+    min-height: 120px;
+    font-size: 1rem;
+  }
+}
+
+/* Small Mobile: 480px and below */
+@media (max-width: 480px) {
+  :root {
+    font-size: 13px;
+  }
+
+  .app-shell {
+    min-height: 100vh;
+  }
+
+  .sidebar {
+    padding: 12px;
+  }
+
+  .brand {
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .brand-mark {
+    width: 32px;
+    height: 32px;
+    font-size: 0.8rem;
+  }
+
+  .brand h1 {
+    font-size: 0.95rem;
+  }
+
+  .brand p {
+    font-size: 0.7rem;
+  }
+
+  .nav-tabs {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .tab-button {
+    padding: 8px 10px;
+    font-size: 0.8rem;
+  }
+
+  .content {
+    padding: 8px;
+  }
+
+  .page-header h2 {
+    font-size: 1.2rem;
+  }
+
+  .toolbar {
+    grid-template-columns: 1fr;
+    padding: 10px;
+    gap: 10px;
+  }
+
+  select,
+  textarea {
+    min-height: 44px;
+    font-size: 1rem;
+    -webkit-appearance: none;
+    appearance: none;
+    padding-right: 30px;
+  }
+
+  .quiz-meta {
+    padding: 8px 10px;
+    font-size: 0.8rem;
+    gap: 6px;
+  }
+
+  .question-card {
+    padding: 12px;
+  }
+
+  .question-text strong {
+    font-size: 0.95rem;
+    line-height: 1.3;
+  }
+
+  .metric-card strong {
+    font-size: 1rem;
+  }
+
+  .unit-row {
+    grid-template-columns: 70px 1fr 45px;
+    gap: 6px;
+  }
+
+  .submit-bar {
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .primary-button,
+  .ghost-button {
+    min-height: 40px;
+    font-size: 0.9rem;
+  }
+}

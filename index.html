@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Uttarakhand GK MCQ Practice</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <span class="brand-mark">UK</span>
+          <div>
+            <h1>Uttarakhand GK</h1>
+            <p>BS Negi practice sets</p>
+          </div>
+        </div>
+
+        <nav class="nav-tabs" aria-label="Main sections">
+          <button class="tab-button active" data-view="practice">Practice</button>
+          <button class="tab-button" data-view="analytics">Analytics</button>
+          <button class="tab-button" data-view="history">History</button>
+          <button class="tab-button" data-view="bank">Question Bank</button>
+        </nav>
+      </aside>
+
+      <section class="content">
+        <section id="practiceView" class="view active">
+          <header class="page-header">
+            <div>
+              <h2>Practice Set</h2>
+              <p>10 questions per selected unit, with +1 and -0.25 marking.</p>
+            </div>
+            <div class="header-actions">
+              <button id="newSetButton" class="primary-button">New Set</button>
+            </div>
+          </header>
+
+          <div class="toolbar">
+            <label>
+              Unit
+              <select id="unitSelect"></select>
+            </label>
+            <label>
+              Language
+              <select id="languageSelect">
+                <option value="bilingual">English + Hindi</option>
+                <option value="en">English</option>
+                <option value="hi">Hindi</option>
+              </select>
+            </label>
+            <label>
+              Mode
+              <select id="modeSelect">
+                <option value="unit">10 from selected unit</option>
+                <option value="all">70 questions, 10 from each unit</option>
+              </select>
+            </label>
+          </div>
+
+          <div id="quizMeta" class="quiz-meta"></div>
+          <form id="quizForm" class="quiz-list"></form>
+
+          <div class="submit-bar">
+            <button id="submitButton" class="primary-button" type="button">Submit Set</button>
+            <div id="scorePreview" class="score-preview"></div>
+          </div>
+        </section>
+
+        <section id="analyticsView" class="view">
+          <header class="page-header">
+            <div>
+              <h2>Analytics</h2>
+              <p>Track accuracy, average score, weak units, and attempts.</p>
+            </div>
+          </header>
+          <div id="analyticsCards" class="metrics-grid"></div>
+          <div class="panel">
+            <h3>Unit Performance</h3>
+            <div id="unitAnalytics" class="unit-analytics"></div>
+          </div>
+        </section>
+
+        <section id="historyView" class="view">
+          <header class="page-header">
+            <div>
+              <h2>Score History</h2>
+              <p>All practice attempts are saved in this browser.</p>
+            </div>
+            <button id="clearHistoryButton" class="ghost-button">Clear History</button>
+          </header>
+          <div id="historyList" class="history-list"></div>
+        </section>
+
+        <section id="bankView" class="view">
+          <header class="page-header">
+            <div>
+              <h2>Question Bank</h2>
+              <p>Browse current questions and add generated JSON later.</p>
+            </div>
+          </header>
+          <div class="panel">
+            <h3>Import JSON</h3>
+            <p class="muted">Paste an array of questions in the same format as <code>data/questions.json</code>. Imported questions are saved locally.</p>
+            <textarea id="importBox" spellcheck="false" placeholder='[{"unit":1,"source":"Unit 1","question":{"en":"...","hi":"..."},"options":[...],"answerIndex":0,"explanation":{"en":"...","hi":"..."}}]'></textarea>
+            <div class="inline-actions">
+              <button id="importButton" class="primary-button">Import Questions</button>
+              <button id="resetBankButton" class="ghost-button">Reset Local Imports</button>
+            </div>
+          </div>
+          <div id="bankList" class="question-bank"></div>
+        </section>
+      </section>
+    </main>
+
+    <script src="data/questions.js"></script>
+    <script src="data/generated_questions.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
