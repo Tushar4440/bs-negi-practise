@@ -5,7 +5,8 @@ const UNITS = [
   { id: 4, name: "Unit 4" },
   { id: 5, name: "Unit 5" },
   { id: 6, name: "Unit 6" },
-  { id: 7, name: "Unit 7" }
+  { id: 7, name: "Unit 7" },
+  { id: "csv", name: "Author-Book" }
 ];
 
 const STORAGE_KEYS = {
@@ -57,6 +58,11 @@ function loadQuestionBank() {
   state.questions = [...base, ...imported];
 }
 
+function unitLabel(id) {
+  const u = UNITS.find((u) => String(u.id) === String(id));
+  return u ? u.name : `Unit ${id}`;
+}
+
 function initUnitSelect() {
   const unitSelect = $("#unitSelect");
   unitSelect.innerHTML = UNITS.map((unit) => `<option value="${unit.id}">${unit.name}</option>`).join("");
@@ -66,12 +72,12 @@ function makePracticeSet() {
   state.submitted = false;
   state.answers = new Map();
   const mode = $("#modeSelect").value;
-  const selectedUnit = Number($("#unitSelect").value);
+  const selectedUnit = $("#unitSelect").value;
 
   if (mode === "all") {
-    state.currentSet = UNITS.flatMap((unit) => sample(state.questions.filter((q) => q.unit === unit.id), 10));
+    state.currentSet = UNITS.flatMap((unit) => sample(state.questions.filter((q) => String(q.unit) === String(unit.id)), 10));
   } else {
-    state.currentSet = sample(state.questions.filter((q) => q.unit === selectedUnit), 10);
+    state.currentSet = sample(state.questions.filter((q) => String(q.unit) === String(selectedUnit)), 10);
   }
 
   renderQuiz();
@@ -81,7 +87,7 @@ function renderQuiz() {
   const language = $("#languageSelect").value;
   const quizForm = $("#quizForm");
   const mode = $("#modeSelect").value;
-  const unitsLabel = mode === "all" ? "All units" : `Unit ${$("#unitSelect").value}`;
+  const unitsLabel = mode === "all" ? "All units" : unitLabel($("#unitSelect").value);
 
   $("#quizMeta").innerHTML = `
     <span>${unitsLabel}</span>
@@ -129,7 +135,7 @@ function renderQuestion(question, index, language) {
           <strong>Q${index + 1}. ${textFor(question.question, language)}</strong>
           <small class="muted">${question.source}</small>
         </div>
-        <span class="tag">Unit ${question.unit}</span>
+        <span class="tag">${unitLabel(question.unit)}</span>
       </div>
       <div class="options">${optionHtml}</div>
       ${explanation}
@@ -232,7 +238,7 @@ function renderAnalytics() {
     const unitAccuracy = attempted === 0 ? 0 : Math.round((stats.correct / attempted) * 100);
     return `
       <div class="unit-row">
-        <strong>Unit ${unit.id}</strong>
+        <strong>${unit.name}</strong>
         <div class="bar-track"><div class="bar-fill" style="width:${unitAccuracy}%"></div></div>
         <span>${unitAccuracy}%</span>
       </div>
@@ -248,7 +254,7 @@ function renderHistory() {
         const date = new Date(item.date).toLocaleString();
         return `
           <article class="history-item">
-            <strong>${item.score.toFixed(2)} / ${item.maxScore} - ${item.mode === "all" ? "All Units" : `Unit ${item.unit}`}</strong>
+            <strong>${item.score.toFixed(2)} / ${item.maxScore} - ${item.mode === "all" ? "All Units" : unitLabel(item.unit)}</strong>
             <span>${date}</span>
             <span>${item.correct} correct, ${item.wrong} wrong, ${item.unattempted} skipped, ${item.accuracy}% accuracy</span>
           </article>
@@ -261,7 +267,7 @@ function renderHistory() {
 function renderBank() {
   const byUnit = UNITS.map((unit) => ({
     unit,
-    count: state.questions.filter((q) => q.unit === unit.id).length
+    count: state.questions.filter((q) => String(q.unit) === String(unit.id)).length
   }));
 
   $("#bankList").innerHTML = `
